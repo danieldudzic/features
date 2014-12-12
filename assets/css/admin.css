@@ -1,3 +1,115 @@
 #adminmenu .menu-icon-feature div.wp-menu-image:before {
   content: '\f155';
 }
+table.features_options {
+  position: relative;
+}
+table.features_options td {
+  vertical-align: middle;
+  padding: 7px;
+}
+table.features_options th {
+  padding: 9px 7px !important;
+  vertical-align: middle;
+}
+table.features_options td.name {
+  font-weight: bold;
+}
+table.features_options .settings {
+  text-align: right;
+}
+table.features_options .radio,
+table.features_options .default,
+table.features_options .status {
+  text-align: center;
+}
+table.features_options .radio .tips,
+table.features_options .default .tips,
+table.features_options .status .tips {
+  margin: 0 auto;
+}
+table.features_options .radio input,
+table.features_options .default input,
+table.features_options .status input {
+  margin: 0;
+}
+table.form-table {
+  margin: 0 0 0;
+}
+table.form-table .forminp-radio ul {
+  margin: 0;
+}
+table.form-table .forminp-radio ul li {
+  line-height: 1.4em;
+}
+table.form-table textarea.input-text {
+  height: 100%;
+  min-width: 150px;
+  display: block;
+}
+table.form-table input.regular-input {
+  width: 25em;
+}
+table.form-table textarea.wide-input {
+  width: 100%;
+}
+table.form-table th {
+  position: relative;
+  padding-right: 24px;
+}
+table.form-table .chosen-container {
+  vertical-align: top;
+  margin-bottom: 3px;
+}
+table.form-table table.widefat th {
+  padding-right: inherit;
+}
+table.form-table fieldset {
+  margin-top: 4px;
+}
+table.form-table fieldset img.help_tip {
+  margin: -3px 0 0 5px;
+}
+table.form-table fieldset p.description {
+  margin-bottom: 8px;
+}
+table.form-table fieldset:first-child {
+  margin-top: 0;
+}
+table.form-table .color_box {
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 4px 6px;
+  float: left;
+  width: 90px;
+  margin: 0 10px 0 0;
+}
+table.form-table .color_box strong {
+  text-align: left;
+  display: block;
+  padding: 0 0 2px;
+  font-size: 0.92em;
+}
+table.form-table .color_box strong img {
+  float: right;
+  margin: 1px 0 0 0;
+}
+table.form-table .color_box input.colorpick {
+  width: 100%;
+  margin: 0;
+  font-family: monospace;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+}
+table.form-table .color_box .iris-picker {
+  margin: 15px 0 0 -7px;
+}

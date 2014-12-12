@@ -15,6 +15,7 @@
 
 require_once( 'classes/class-woothemes-features.php' );
 require_once( 'classes/class-woothemes-features-taxonomy.php' );
+require_once( 'classes/class-woothemes-features-settings.php' );
 require_once( 'woothemes-features-template.php' );
 require_once( 'classes/class-woothemes-widget-features.php' );
 global $woothemes_features;

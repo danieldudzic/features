@@ -1,5 +1,5 @@
-=== Features by WooThemes ===
-Contributors: woothemes, mattyza, jameskoster, hlashbrooke
+=== Features & Services by WooThemes ===
+Contributors: woothemes, mattyza, jameskoster, hlashbrooke, danieldudzic
 Donate link: http://woothemes.com/
 Tags: features, widget, shortcode, template-tag, services
 Requires at least: 3.4.2
@@ -12,7 +12,7 @@ Show off what features your company, product or service offers, using our shortc
 
 == Description ==
 
-"Features by WooThemes" is a clean and easy-to-use features showcase management system for WordPress. Load in the features your product, company or services offers, and display them via a shortcode, widget or template tag on your website.
+"Features & Services by WooThemes" is a clean and easy-to-use features showcase management system for WordPress. Load in the features your product, company or services offers, and display them via a shortcode, widget or template tag on your website.
 
 Looking for a helping hand? [View plugin documentation](http://wordpress.org/extend/plugins/features-by-woothemes/other_notes/).
 
@@ -80,7 +80,7 @@ woothemes_features() template tag:
 
 == Installation ==
 
-Installing "Features by WooThemes" can be done either by searching for "Features by WooThemes" via the "Plugins > Add New" screen in your WordPress dashboard, or by using the following steps:
+Installing "Features & Services by WooThemes" can be done either by searching for "Features & Services by WooThemes" via the "Plugins > Add New" screen in your WordPress dashboard, or by using the following steps:
 
 1. Download the plugin via WordPress.org.
 1. Upload the ZIP file through the "Plugins > Add New > Upload" screen in your WordPress dashboard.
@@ -91,7 +91,7 @@ Installing "Features by WooThemes" can be done either by searching for "Features
 
 = The plugin looks unstyled when I activate it. Why is this? =
 
-"Features by WooThemes" is a lean plugin that aims to keep it's purpose as clean and clear as possible. Thus, we don't load any preset CSS styling, to allow full control over the styling within your theme or child theme.
+"Features & Services by WooThemes" is a lean plugin that aims to keep it's purpose as clean and clear as possible. Thus, we don't load any preset CSS styling, to allow full control over the styling within your theme or child theme.
 
 = How do I contribute? =
 
