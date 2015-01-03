@@ -40,7 +40,7 @@ class Features_Settings {
 	public function get_settings_sections () {
 		$settings_sections = array();
 
-		$settings_sections['pages-fields'] 		= __( 'General', 'features-by-woothemes' );
+		$settings_sections['label'] = __( 'General', 'features-by-woothemes' );
 
 		return (array)apply_filters( 'features_settings_sections', $settings_sections );
 	} // End get_settings_sections()
@@ -65,20 +65,17 @@ class Features_Settings {
 						$class = ' nav-tab-active';
 					} // End If Statement
 
-					echo '<a href="' . admin_url( 'edit.php?post_type=project&page=features-settings-page&tab=' . $key ) . '" class="nav-tab' . $class . '">' . $value . '</a>';
+					echo '<a href="' . admin_url( 'edit.php?post_type=feature&page=features-settings-page&tab=' . $key ) . '" class="nav-tab' . $class . '">' . $value . '</a>';
 				} // End For Loop
 				?>
 			</h2>
 			<form action="options.php" method="post">
-
 				<?php
-				settings_fields( 'features-settings-' . $tab );
-				do_settings_sections( 'features-' . $tab );
+					settings_fields( 'features-settings-' . $tab );
+					do_settings_sections( 'features-' . $tab );
 				?>
 
-				<p class="submit">
-					<input type="submit" class="button-primary" value="<?php _e( 'Save Changes' ) ?>" />
-				</p>
+				<?php submit_button(); ?>
 
 			</form>
 
@@ -87,16 +84,15 @@ class Features_Settings {
 	} // End features_settings_page()
 
 	public function features_options_init(){
-
 		$sections = $this->get_settings_sections();
 		if ( 0 < count( $sections ) ) {
 			foreach ( $sections as $k => $v ) {
 				$callback_array = explode( '-', $k );
 				if ( method_exists( $this, 'features_' . $callback_array[0] . '_settings_validate' ) ) {
-					register_setting( 'features-settings-' . $k, 'features-' . $k, array( $this, 'features_' . $callback_array[0] . '_settings_validate' ) );
+					register_setting( 'features-settings-' . $k, 'features_' . $k, array( $this, 'features_' . $callback_array[0] . '_settings_validate' ) );
 					add_settings_section( $k, $v, array( $this, 'features_' . $callback_array[0] . '_settings' ), 'features-' . $k );
 				} elseif( function_exists( 'features_' . $callback_array[0] . '_settings_validate' ) ) {
-					register_setting( 'features-settings-' . $k, 'features-' . $k, 'features_' . $callback_array[0] . '_settings_validate' );
+					register_setting( 'features-settings-' . $k, 'features_' . $k, 'features_' . $callback_array[0] . '_settings_validate' );
 					add_settings_section( $k, $v, 'features_' . $callback_array[0] . '_settings', 'features-' . $k );
 				} // End If Statement
 			} // End For Loop
@@ -104,88 +100,60 @@ class Features_Settings {
 
 	} // End features_options_init()
 
-	public function features_pages_settings() {
+	public function features_label_settings() {
 		?>
 
 		<p><?php _e( 'Configure Features plugin label.', 'features-by-woothemes' ); ?></p>
 
-		<table class="form-table">
-		<tbody>
-		<tr valign="top">
-			<th scope="row" class="titledesc"><?php _e( 'Plugin Label', 'features-by-woothemes' ) ?></th>
-		    <td class="forminp">
-				<table class="features_options widefat" cellspacing="0">
-					<thead>
-						<tr>
-							<?php
-								$columns = apply_filters( 'woothemes_features_label_setting_columns', array(
-									'default'  => __( 'Default', 'features-by-woothemes' ),
-									'name'     => __( 'Label', 'features-by-woothemes' )
-								) );
-
-								foreach ( $columns as $key => $column ) {
-									echo '<th class="' . esc_attr( $key ) . '">' . esc_html( $column ) . '</th>';
-								}
-							?>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						$labels = array(
-							'features' => 'Features',
-							'services' => 'Services',
-						);
-
-						foreach ( $labels as $label_key => $label_value ) {
-
-							echo '<tr>';
-
-							foreach ( $columns as $key => $column ) {
-
-								switch ( $key ) {
-
-									case 'default' :
-										echo '<td width="1%" class="default">
-											<input type="radio" name="default_label" value="' . $label_key . '" />
-										</td>';
-									break;
-
-									case 'name' :
-										echo '<td class="name">
-											' . $label_value . '
-										</td>';
-									break;
-
-									default :
-										do_action( 'woothemes_features_label_setting_column_' . $key, $gateway );
-									break;
-								}
-							}
-
-							echo '</tr>';
-						}
-						?>
-					</tbody>
-				</table>
-			</td>
-		</tr>
-		</tbody>
-		</table>
 		<?php
-	} // End features_pages_settings()
+
+			$labels = array(
+				'features' => 'Features',
+				'services' => 'Services',
+			);
+
+			$labels = apply_filters( 'woothemes_features_labels', $labels );
+
+		?>
+		<table class="form-table features_options">
+			<tbody>
+			<?php
+
+				$saved_label = get_option( 'features_label' );
+
+				if ( empty ( $saved_label ) ) {
+					$saved_label = 'features';
+				}
+
+				foreach ( $labels as $label_key => $label_value ) {
+
+					if( $saved_label == $label_key ) {
+						$checked = 'checked';
+					} else {
+						$checked = '';
+					}
+
+					echo '<tr>';
+					echo '<th><label><input type="radio" value="' . $label_key . '" name="features_label" ' . $checked . '>' . $label_value . '</label></th>';
+					echo '<td><code>' . get_site_url() . '/' . $label_key . '</code></td>';
+					echo '</tr>';
+				}
+			?>
+			</tbody>
+		</table>
+
+		<?php
+	} // End features_label_settings()
 
 	/**
-	 * features_pages_settings_validate validates pages settings form data
+	 * validates label settings form data
 	 * @param  array $input array of form data
 	 * @since  1.4.4
 	 * @return array $input array of sanitized form data
 	 */
-	public function features_pages_settings_validate( $input ) {
-
-		$input['features_page_id']				= absint( $input['features_page_id'] );
-
+	public function features_label_settings_validate( $input ) {
 		return $input;
-	} // End features_pages_settings_validate()
+	} // End features_label_settings_validate()
 
 } // End Class
 
