@@ -110,6 +110,7 @@ class Features_Settings {
 			$labels = array(
 				'features' => 'Features',
 				'services' => 'Services',
+				'custom' => 'Custom'
 			);
 
 			$labels = apply_filters( 'woothemes_features_labels', $labels );
@@ -119,24 +120,39 @@ class Features_Settings {
 			<tbody>
 			<?php
 
-				$saved_label = get_option( 'features_label' );
+				$options = get_option( 'features_label' );
 
-				if ( empty ( $saved_label ) ) {
-					$saved_label = 'features';
-				}
+				$defaults = apply_filters( 'features_default_label', array(
+					'option' => 'features',
+					'custom' => ''
+				) );
+
+				// Parse incomming $options into an array and merge it with $defaults
+				$options = wp_parse_args( $options, $defaults );
+
 
 				foreach ( $labels as $label_key => $label_value ) {
 
-					if( $saved_label == $label_key ) {
+					if( $options['option'] == $label_key || empty( $options['option'] ) && 'features' == $label_key) {
 						$checked = 'checked';
 					} else {
 						$checked = '';
 					}
 
-					echo '<tr>';
-					echo '<th><label><input type="radio" value="' . $label_key . '" name="features_label" ' . $checked . '>' . $label_value . '</label></th>';
-					echo '<td><code>' . get_site_url() . '/' . $label_key . '</code></td>';
-					echo '</tr>';
+					if ( $label_key == 'custom' ) {
+
+						echo '<tr>';
+						echo '<th><label><input type="radio" value="' . $label_key . '" name="features_label[option]" ' . $checked . '>' . $label_value . '</label></th>';
+						echo '<td><code>' . get_site_url() . '/</code><input type="text" class="regular-text code" value="' . $options['custom'] . '" name="features_label[custom]"></td>';
+						echo '</tr>';
+
+					} else {
+
+						echo '<tr>';
+						echo '<th><label><input type="radio" value="' . $label_key . '" name="features_label[option]" ' . $checked . '>' . $label_value . '</label></th>';
+						echo '<td><code>' . get_site_url() . '/' . $label_key . '</code></td>';
+						echo '</tr>';
+					}
 				}
 			?>
 			</tbody>
